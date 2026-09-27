@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarePoint Clinic Management Portal</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="logo">
+            <span>Care</span>Point
+            <small>Clinic Management</small>
+        </div>
+
+        <nav>
+
+            <p class="menu-title">MAIN</p>
+
+            <button class="nav-btn active" onclick="showPage('dashboard', this)">
+                📊 Dashboard
+            </button>
+
+            <button class="nav-btn" onclick="showPage('patients', this)">
+                👥 Patients
+            </button>
+
+            <button class="nav-btn" onclick="showPage('doctors', this)">
+                👨‍⚕️ Doctors
+            </button>
+
+            <button class="nav-btn" onclick="showPage('appointments', this)">
+                📅 Appointments
+            </button>
+
+            <button class="nav-btn" onclick="showPage('records', this)">
+                📋 Medical Records
+            </button>
+
+            <p class="menu-title">SERVICES</p>
+
+            <button class="nav-btn" onclick="showPage('emergency', this)">
+                🚑 Emergency
+            </button>
+
+            <button class="nav-btn" onclick="showPage('billing', this)">
+                💳 Billing
+            </button>
+
+            <p class="menu-title">SYSTEM</p>
+
+            <button class="nav-btn" onclick="showPage('settings', this)">
+                ⚙️ Settings
+            </button>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <!-- HEADER -->
+        <header class="header">
+
+            <div class="header-left">
+
+                <button class="mobile-menu" onclick="toggleSidebar()">
+                    ☰
+                </button>
+
+                <h2 id="pageTitle">Dashboard</h2>
+
+            </div>
+
+            <div class="admin-profile">
+
+                <div>
+                    <strong>Admin</strong>
+                    <small>Clinic Administrator</small>
+                </div>
+
+                <div class="avatar">
+                    A
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= CONTENT ================= -->
+
+        <div class="content">
+
+
+            <!-- ================= DASHBOARD ================= -->
+
+            <section id="dashboard" class="page active">
+
+                <div class="stats">
+
+                    <div class="stat-card">
+
+                        <div>
+                            <p>Total Patients</p>
+                            <h2>1,248</h2>
+                            <small>+12% this month</small>
+                        </div>
+
+                        <div class="stat-icon blue">
+                            👥
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div>
+                            <p>Total Doctors</p>
+                            <h2>36</h2>
+                            <small>4 departments</small>
+                        </div>
+
+                        <div class="stat-icon green">
+                            👨‍⚕️
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div>
+                            <p>Appointments</p>
+                            <h2>84</h2>
+                            <small>Today's appointments</small>
+                        </div>
+
+                        <div class="stat-icon purple">
+                            📅
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div>
+                            <p>Revenue</p>
+                            <h2>₹1.84L</h2>
+                            <small>This month</small>
+                        </div>
+
+                        <div class="stat-icon orange">
+                            💰
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-grid">
+
+                    <!-- APPOINTMENTS -->
+
+                    <div class="card">
+
+                        <div class="card-header">
+
+                            <h3>Today's Appointments</h3>
+
+                            <button class="primary-btn"
+                                onclick="openAppointmentModal()">
+                                + Appointment
+                            </button>
+
+                        </div>
+
+                        <div class="table-container">
+
+                            <table>
+
+                                <thead>
+
+                                    <tr>
+                                        <th>Patient</th>
+                                        <th>Doctor</th>
+                                        <th>Time</th>
+                                        <th>Status</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="dashboardAppointments">
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EMERGENCY -->
+
+                    <div class="card emergency-card">
+
+                        <div class="card-header">
+
+                            <h3>Emergency Center</h3>
+
+                            <span class="emergency-icon">
+                                🚑
+                            </span>
+
+                        </div>
+
+                        <p>
+                            Quickly create and track an emergency
+                            ambulance request.
+                        </p>
+
+                        <button class="danger-btn"
+                            onclick="openPageFromButton('emergency')">
+
+                            🚑 Emergency Request
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- APPOINTMENT CHART -->
+
+                <div class="card chart-card">
+
+                    <h3>Weekly Appointment Overview</h3>
+
+                    <div class="chart">
+
+                        <div class="bar" style="height:50%">
+                            <span>Mon</span>
+                        </div>
+
+                        <div class="bar" style="height:70%">
+                            <span>Tue</span>
+                        </div>
+
+                        <div class="bar" style="height:55%">
+                            <span>Wed</span>
+                        </div>
+
+                        <div class="bar" style="height:85%">
+                            <span>Thu</span>
+                        </div>
+
+                        <div class="bar" style="height:72%">
+                            <span>Fri</span>
+                        </div>
+
+                        <div class="bar" style="height:95%">
+                            <span>Sat</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================= PATIENTS ================= -->
+
+            <section id="patients" class="page">
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h3>Patient Management</h3>
+
+                        <button class="primary-btn"
+                            onclick="openPatientModal()">
+
+                            + Add Patient
+
+                        </button>
+
+                    </div>
+
+
+                    <input
+                        type="text"
+                        id="patientSearch"
+                        class="search"
+                        placeholder="Search patient by name or phone..."
+                        onkeyup="searchPatients()"
+                    >
+
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Age</th>
+                                    <th>Blood Group</th>
+                                    <th>Action</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="patientTable">
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================= DOCTORS ================= -->
+
+            <section id="doctors" class="page">
+
+                <div class="section-heading">
+
+                    <h3>Our Doctors</h3>
+
+                    <button class="primary-btn"
+                        onclick="showNotification('Doctor added successfully')">
+
+                        + Add Doctor
+
+                    </button>
+
+                </div>
+
+
+                <div class="doctor-grid" id="doctorGrid">
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================= APPOINTMENTS ================= -->
+
+            <section id="appointments" class="page">
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h3>Appointment Management</h3>
+
+                        <button class="primary-btn"
+                            onclick="openAppointmentModal()">
+
+                            + Book Appointment
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Patient</th>
+                                    <th>Doctor</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Status</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="appointmentTable">
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================= RECORDS ================= -->
+
+            <section id="records" class="page">
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h3>Medical Records</h3>
+
+                        <button class="secondary-btn"
+                            onclick="showNotification('Upload feature ready')">
+
+                            + Upload Record
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>Patient</th>
+                                    <th>Diagnosis</th>
+                                    <th>Doctor</th>
+                                    <th>Date</th>
+                                    <th>Prescription</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td>Rahul Sharma</td>
+                                    <td>Hypertension</td>
+                                    <td>Dr. Ananya</td>
+                                    <td>27 Sep 2026</td>
+                                    <td>
+                                        <button class="small-btn">
+                                            View
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Priya Patil</td>
+                                    <td>Fever</td>
+                                    <td>Dr. Rahul</td>
+                                    <td>26 Sep 2026</td>
+                                    <td>
+                                        <button class="small-btn">
+                                            View
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Amit Joshi</td>
+                                    <td>Back Pain</td>
+                                    <td>Dr. Mehta</td>
+                                    <td>25 Sep 2026</td>
+                                    <td>
+                                        <button class="small-btn">
+                                            View
+                                        </button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================= EMERGENCY ================= -->
+
+            <section id="emergency" class="page">
+
+                <div class="card emergency-box">
+
+                    <div class="emergency-header">
+
+                        <div>
+
+                            <h2>🚑 Emergency & Ambulance Center</h2>
+
+                            <p>
+                                Create an emergency ambulance request.
+                            </p>
+
+                        </div>
+
+                        <div class="large-emergency">
+                            🚑
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>Patient Name</label>
+
+                            <input
+                                type="text"
+                                id="emergencyName"
+                                placeholder="Enter patient name"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Phone Number</label>
+
+                            <input
+                                type="tel"
+                                id="emergencyPhone"
+                                placeholder="10 digit phone number"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Emergency Type</label>
+
+                            <select id="emergencyType">
+
+                                <option>Accident</option>
+                                <option>Cardiac Emergency</option>
+                                <option>Breathing Problem</option>
+                                <option>Serious Injury</option>
+                                <option>Other</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Current Location</label>
+
+                            <input
+                                type="text"
+                                id="emergencyLocation"
+                                placeholder="Enter location"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label>Additional Information</label>
+
+                            <textarea
+                                id="emergencyInfo"
+                                rows="4"
+                                placeholder="Describe the emergency..."
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="danger-btn emergency-submit"
+                        onclick="requestAmbulance()">
+
+                        🚑 Request Ambulance
+
+                    </button>
+
+
+                    <div id="emergencyResult"></div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================= BILLING ================= -->
+
+            <section id="billing" class="page">
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h3>Billing & Payments</h3>
+
+                        <button
+                            class="primary-btn"
+                            onclick="showNotification('New invoice created')">
+
+                            + New Invoice
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>Invoice</th>
+                                    <th>Patient</th>
+                                    <th>Service</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td>INV-1001</td>
+                                    <td>Rahul Sharma</td>
+                                    <td>Consultation</td>
+                                    <td>₹800</td>
+                                    <td>
+                                        <span class="badge success">
+                                            Paid
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>INV-1002</td>
+                                    <td>Priya Patil</td>
+                                    <td>Blood Test</td>
+                                    <td>₹650</td>
+                                    <td>
+                                        <span class="badge pending">
+                                            Pending
+                                        </span>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================= SETTINGS ================= -->
+
+            <section id="settings" class="page">
+
+                <div class="card">
+
+                    <h3>Clinic Settings</h3>
+
+                    <br>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>Clinic Name</label>
+
+                            <input
+                                type="text"
+                                value="CarePoint Clinic"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Contact Number</label>
+
+                            <input
+                                type="text"
+                                value="+91 98765 43210"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label>Clinic Address</label>
+
+                            <textarea rows="4">
+Pune, Maharashtra, India
+                            </textarea>
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="primary-btn"
+                        onclick="showNotification('Settings saved successfully')">
+
+                        Save Settings
+
+                    </button>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+
+<!-- ================= MODAL ================= -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h3 id="modalTitle">
+                Form
+            </h3>
+
+            <button
+                class="close-btn"
+                onclick="closeModal()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <div id="modalContent"></div>
+
+    </div>
+
+</div>
+
+
+<!-- NOTIFICATION -->
+
+<div id="notification" class="notification">
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
